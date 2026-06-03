@@ -1,8 +1,8 @@
 import React from 'react'
 
 const items = [
-  '🌟 Admissions Open 2025–26',
-  '📚 CBSE Affiliated English Medium School',
+  '🌟 Admissions Open 2026–27',
+  '📚 CGBSE Affiliated English Medium School',
   '🏆 Excellence in Education',
   '🎨 Co-curricular Activities',
   '💻 Smart Classrooms',

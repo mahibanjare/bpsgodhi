@@ -26,7 +26,7 @@ const stats = [
   { value: 500, suffix: '+', label: 'Students Enrolled', icon: '👨‍🎓' },
   { value: 30, suffix: '+', label: 'Expert Teachers', icon: '👩‍🏫' },
   { value: 14, suffix: '', label: 'Classes Offered', icon: '📚' },
-  { value: 100, suffix: '%', label: 'CBSE Certified', icon: '🏅' },
+  { value: 100, suffix: '%', label: 'CGBSE Certified', icon: '🏅' },
 ]
 
 export default function Stats() {

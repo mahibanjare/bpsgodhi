@@ -12,7 +12,7 @@ const testimonials = [
     name: 'Rajesh Verma',
     role: 'Parent of Class X Student',
     avatar: 'RV',
-    text: 'The academic quality here is exceptional. My son scored among the top students in his CBSE boards, and the school\'s personalized attention to each child made all the difference. A truly excellent institution.',
+    text: 'The academic quality here is exceptional. My son scored among the top students in his CGBSE boards, and the school\'s personalized attention to each child made all the difference. A truly excellent institution.',
     stars: 5,
   },
   {

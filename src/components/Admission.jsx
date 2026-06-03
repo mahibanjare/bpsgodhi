@@ -52,7 +52,7 @@ export default function Admission() {
         <div style={{ textAlign: 'center', marginBottom: 64 }}>
           <div className="gold-divider" style={{ justifyContent: 'center' }}>
             <span />
-            <p>Admissions 2025–26</p>
+            <p>Admissions 2026–27</p>
             <span />
           </div>
           <h2 style={{

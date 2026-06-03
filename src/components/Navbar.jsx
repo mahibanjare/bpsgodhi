@@ -67,7 +67,7 @@ export default function Navbar() {
               Bright Public School
             </div>
             <div style={{ fontSize: '0.65rem', color: 'var(--gold)', letterSpacing: '0.12em', fontWeight: 600, textTransform: 'uppercase' }}>
-              CBSE • English Medium • Nursery–XII
+              CGBSE • English Medium • Nursery–XII
             </div>
           </div>
         </a>

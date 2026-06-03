@@ -15,7 +15,7 @@ const programs = [
     subtitle: 'Class I to V',
     color: '#2980B9',
     desc: 'Strong foundational academics with emphasis on conceptual understanding. Students explore Science, Math, English, Hindi, and Social Studies through engaging methods.',
-    features: ['CBSE Curriculum', 'Smart Board Classes', 'Project-Based Learning', 'Regular Assessments'],
+    features: ['CGBSE Curriculum', 'Smart Board Classes', 'Project-Based Learning', 'Regular Assessments'],
   },
   {
     emoji: '🔬',
@@ -30,7 +30,7 @@ const programs = [
     title: 'Secondary School',
     subtitle: 'Class IX to X',
     color: '#E67E22',
-    desc: 'Comprehensive preparation for CBSE Board Examinations with expert faculty, regular mock tests, and personalized mentoring for every student.',
+    desc: 'Comprehensive preparation for CGBSE Board Examinations with expert faculty, regular mock tests, and personalized mentoring for every student.',
     features: ['Board Exam Preparation', 'Expert Faculty', 'Regular Mock Tests', 'Personalized Mentoring'],
   },
   {

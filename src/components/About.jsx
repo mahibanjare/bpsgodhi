@@ -76,7 +76,7 @@ export default function About() {
               animation: 'float 5s ease-in-out infinite 1s',
             }}>
               <div style={{ fontSize: '2rem', fontWeight: 900, fontFamily: 'var(--font-display)' }}>100%</div>
-              <div style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.06em' }}>CBSE Certified</div>
+              <div style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.06em' }}>CGBSE Certified</div>
             </div>
           </div>
 
@@ -100,7 +100,7 @@ export default function About() {
             </h2>
 
             <p style={{ color: 'var(--text-mid)', lineHeight: 1.9, marginBottom: 20, fontSize: '0.97rem' }}>
-              Bright Public School is situated in the serene environment of Godhi, Mandir Hasaud, Naya Raipur — one of Chhattisgarh's most progressive cities. We are a fully affiliated CBSE school offering English medium education from Nursery through Class XII.
+              Bright Public School is situated in the serene environment of Godhi, Mandir Hasaud, Naya Raipur — one of Chhattisgarh's most progressive cities. We are a fully affiliated CGBSE school offering English medium education from Nursery through Class XII.
             </p>
             <p style={{ color: 'var(--text-mid)', lineHeight: 1.9, marginBottom: 36, fontSize: '0.97rem' }}>
               Our school combines a rigorous academic curriculum with a rich variety of co-curricular activities, ensuring that every student develops not just intellectually, but emotionally, socially, and physically.
@@ -109,7 +109,7 @@ export default function About() {
             {/* Feature list */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 36 }}>
               {[
-                'CBSE Pattern Curriculum',
+                'CGBSE Pattern Curriculum',
                 'Experienced Faculty',
                 'Smart Digital Classrooms',
                 'Sports & Arts Programs',

@@ -22,10 +22,10 @@ export default function Footer() {
       }}>
         <div>
           <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', fontWeight: 800, color: 'var(--navy)', marginBottom: 6 }}>
-            Admissions Open for 2025–26
+            Admissions Open for 2026–27
           </h3>
           <p style={{ color: 'rgba(10,22,40,0.7)', fontSize: '0.95rem' }}>
-            Nursery to Class XII · CBSE · English Medium · Call us today!
+            Nursery to Class XII · CGBSE · English Medium · Call us today!
           </p>
         </div>
         <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
@@ -67,28 +67,32 @@ export default function Footer() {
                 Bright Public School
               </div>
               <div style={{ fontSize: '0.65rem', color: 'var(--gold)', letterSpacing: '0.1em', fontWeight: 600, textTransform: 'uppercase' }}>
-                CBSE • English Medium
+                CGBSE • English Medium
               </div>
             </div>
           </div>
           <p style={{ lineHeight: 1.8, fontSize: '0.88rem', maxWidth: 280, marginBottom: 24 }}>
-            Illuminating Minds, Building Futures. A premier CBSE English Medium institution in Naya Raipur offering quality education from Nursery to Class XII.
+            Illuminating Minds, Building Futures. A premier CGBSE English Medium institution in Naya Raipur offering quality education from Nursery to Class XII.
           </p>
           <div style={{ display: 'flex', gap: 10 }}>
-            {['Facebook', 'Instagram', 'YouTube'].map(s => (
-              <a key={s} href="#" style={{
+            {[
+              { name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61590216284968', icon: 'f' },
+              { name: 'Instagram', url: 'https://www.instagram.com/brightpublic.school/', icon: '📷' },
+              { name: 'YouTube', url: 'https://www.youtube.com/@BrightPublicSchoolGodhi', icon: '▶' }
+            ].map(social => (
+              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" title={social.name} style={{
                 width: 38, height: 38, borderRadius: '50%',
                 background: 'rgba(255,255,255,0.06)',
                 border: '1px solid rgba(255,255,255,0.1)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 color: 'rgba(255,255,255,0.5)',
-                fontSize: '0.75rem',
+                fontSize: '0.9rem',
                 textDecoration: 'none',
                 transition: 'all 0.25s',
               }}
               onMouseEnter={e => { e.currentTarget.style.background = 'var(--gold)'; e.currentTarget.style.color = 'var(--navy)'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}
-              >{s[0]}</a>
+              >{social.icon}</a>
             ))}
           </div>
         </div>
@@ -172,10 +176,10 @@ export default function Footer() {
         gap: 12,
       }}>
         <p style={{ fontSize: '0.8rem' }}>
-          © {year} Bright Public School, Naya Raipur. All Rights Reserved.
+          © {year} Bright Public School, Godhi. All Rights Reserved.
         </p>
         <p style={{ fontSize: '0.8rem' }}>
-          CBSE English Medium School | Nursery to Class XII
+          Design & Develop  by <a href="https://mbjare.com" style={{ color: 'var(--gold)', textDecoration: 'none', fontWeight: 600 }}>Mbjare</a>
         </p>
       </div>
 

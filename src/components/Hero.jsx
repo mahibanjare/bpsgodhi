@@ -103,12 +103,12 @@ export default function Hero() {
             maxWidth: 480,
             marginBottom: 40,
           }}>
-            A premier CBSE English Medium school in the heart of Naya Raipur, offering world-class education from Nursery to Class XII. Where every child's potential is nurtured with care and excellence.
+            A premier CGBSE English Medium school in the heart of Naya Raipur, offering world-class education from Nursery to Class XII. Where every child's potential is nurtured with care and excellence.
           </p>
 
           {/* Badges */}
           <div className="animate-fadeUp delay-4" style={{ display: 'flex', gap: 12, marginBottom: 40, flexWrap: 'wrap' }}>
-            {['CBSE Affiliated', 'English Medium', 'Nursery–XII', 'Smart Classrooms'].map(b => (
+            {['CGBSE Affiliated', 'English Medium', 'Nursery–XII', 'Smart Classrooms'].map(b => (
               <span key={b} style={{
                 padding: '6px 16px',
                 border: '1px solid rgba(201,168,76,0.4)',
@@ -167,7 +167,7 @@ export default function Hero() {
           {/* Info cards */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, width: '100%' }}>
             {[
-              { icon: '🏛️', label: 'Affiliated Board', value: 'CBSE' },
+              { icon: '🏛️', label: 'Affiliated Board', value: 'CGBSE' },
               { icon: '📚', label: 'Medium', value: 'English' },
               { icon: '🎓', label: 'Classes', value: 'Nursery–XII' },
               { icon: '📞', label: 'Contact', value: '91651 87777' },
