@@ -50,7 +50,7 @@ export default function Contact() {
               {
                 icon: '🏛️',
                 title: 'Board Affiliation',
-                lines: ['Central Board of', 'Secondary Education (CGBSE)'],
+                lines: ['Chhattisgarh Board of', 'Secondary Education (CGBSE)'],
               },
             ].map(c => (
               <div key={c.title} style={{

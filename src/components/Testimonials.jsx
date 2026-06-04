@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const testimonials = [
   {
@@ -33,6 +33,14 @@ const testimonials = [
 
 export default function Testimonials() {
   const [active, setActive] = useState(0)
+
+  // Auto-slideshow every 2.5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActive((prev) => (prev + 1) % testimonials.length)
+    }, 2500)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <section style={{
@@ -75,6 +83,8 @@ export default function Testimonials() {
           padding: '48px 56px',
           marginBottom: 32,
           position: 'relative',
+          transition: 'opacity 0.6s ease-in-out',
+          opacity: 1,
         }}>
           {/* Quote mark */}
           <div style={{
