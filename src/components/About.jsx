@@ -31,7 +31,7 @@ export default function About() {
           <div style={{ position: 'relative' }}>
             {/* Main image card */}
             <div style={{
-              background: 'var(--navy)',
+              background: 'var(--surface)',
               borderRadius: 16,
               padding: 48,
               position: 'relative',
@@ -56,7 +56,7 @@ export default function About() {
                   fontWeight: 700,
                   marginBottom: 16,
                 }}>Our Mission</h3>
-                <p style={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1.8, fontSize: '0.95rem' }}>
+                <p style={{ color: 'var(--text-dark)', lineHeight: 1.8, fontSize: '0.95rem' }}>
                   To provide holistic education that nurtures intellectual curiosity, moral integrity, and creative excellence in every student — preparing them to be confident global citizens.
                 </p>
               </div>

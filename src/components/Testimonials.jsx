@@ -44,7 +44,7 @@ export default function Testimonials() {
 
   return (
     <section style={{
-      background: 'var(--navy)',
+      background: 'var(--surface)',
       padding: '100px 40px',
       position: 'relative',
       overflow: 'hidden',
@@ -68,7 +68,7 @@ export default function Testimonials() {
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(2rem, 4vw, 2.8rem)',
             fontWeight: 800,
-            color: 'var(--white)',
+            color: 'var(--navy)',
             marginTop: 12,
           }}>
             What Our Community Says
@@ -77,7 +77,7 @@ export default function Testimonials() {
 
         {/* Main testimonial */}
         <div style={{
-          background: 'rgba(255,255,255,0.04)',
+          background: 'var(--surface-soft)',
           border: '1px solid rgba(201,168,76,0.2)',
           borderRadius: 20,
           padding: '48px 56px',
@@ -106,7 +106,7 @@ export default function Testimonials() {
           <p style={{
             fontFamily: 'var(--font-italic)',
             fontSize: '1.25rem',
-            color: 'rgba(255,255,255,0.85)',
+            color: 'var(--text-dark)',
             lineHeight: 1.85,
             fontStyle: 'italic',
             marginBottom: 32,

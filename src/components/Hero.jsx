@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section id="home" style={{
       minHeight: '100vh',
-      background: 'var(--navy)',
+      background: 'var(--surface-soft)',
       position: 'relative',
       display: 'flex',
       alignItems: 'center',
@@ -68,7 +68,7 @@ export default function Hero() {
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(2.8rem, 5vw, 4.2rem)',
             fontWeight: 900,
-            color: 'var(--white)',
+              color: 'var(--navy)',
             lineHeight: 1.1,
             marginBottom: 8,
           }}>
@@ -78,7 +78,7 @@ export default function Hero() {
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(2.8rem, 5vw, 4.2rem)',
             fontWeight: 900,
-            color: 'var(--gold)',
+              color: 'var(--gold)',
             lineHeight: 1.1,
             marginBottom: 24,
           }}>
@@ -88,7 +88,7 @@ export default function Hero() {
           <p className="animate-fadeUp delay-3" style={{
             fontFamily: 'var(--font-italic)',
             fontSize: '1.25rem',
-            color: 'rgba(255,255,255,0.6)',
+            color: 'var(--text-dark)',
             fontStyle: 'italic',
             marginBottom: 16,
             letterSpacing: '0.02em',
@@ -97,7 +97,7 @@ export default function Hero() {
           </p>
 
           <p className="animate-fadeUp delay-4" style={{
-            color: 'rgba(255,255,255,0.65)',
+            color: 'var(--text-mid)',
             fontSize: '0.95rem',
             lineHeight: 1.8,
             maxWidth: 480,
@@ -113,7 +113,7 @@ export default function Hero() {
                 padding: '6px 16px',
                 border: '1px solid rgba(201,168,76,0.4)',
                 borderRadius: 2,
-                color: 'var(--gold-pale)',
+                color: 'var(--navy)',
                 fontSize: '0.78rem',
                 letterSpacing: '0.08em',
                 fontWeight: 500,
@@ -148,14 +148,14 @@ export default function Hero() {
               position: 'absolute',
               width: 280, height: 280,
               borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%)',
               animation: 'pulse-gold 3s ease-in-out infinite',
             }} />
             <div style={{
               width: 200, height: 200,
               borderRadius: '50%',
-              background: 'rgba(255,255,255,0.04)',
-              border: '2px solid rgba(201,168,76,0.3)',
+              background: 'var(--surface)',
+              border: '2px solid rgba(201,168,76,0.18)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -192,7 +192,7 @@ export default function Hero() {
       <div style={{
         position: 'absolute', bottom: 32, left: '50%', transform: 'translateX(-50%)',
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
-        color: 'rgba(255,255,255,0.3)', fontSize: '0.72rem', letterSpacing: '0.12em',
+        color: 'rgba(16,36,61,0.45)', fontSize: '0.72rem', letterSpacing: '0.12em',
         textTransform: 'uppercase',
         animation: 'float 2s ease-in-out infinite',
       }}>

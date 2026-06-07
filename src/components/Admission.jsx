@@ -1,30 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 export default function Admission() {
-  const [form, setForm] = useState({ name: '', phone: '', email: '', class: '', message: '' })
-  const [sent, setSent] = useState(false)
-
-  const handle = e => setForm({ ...form, [e.target.name]: e.target.value })
-
-  const submit = e => {
-    e.preventDefault()
-    setSent(true)
-    setTimeout(() => setSent(false), 5000)
-    setForm({ name: '', phone: '', email: '', class: '', message: '' })
-  }
-
-  const inputStyle = {
-    width: '100%',
-    padding: '14px 18px',
-    background: 'rgba(255,255,255,0.06)',
-    border: '1px solid rgba(201,168,76,0.25)',
-    borderRadius: 8,
-    color: 'var(--white)',
-    fontFamily: 'var(--font-body)',
-    fontSize: '0.9rem',
-    outline: 'none',
-    transition: 'border-color 0.25s',
-  }
 
   const steps = [
     { n: '01', title: 'Fill Inquiry Form', desc: 'Complete the online inquiry form with your details.' },
@@ -35,7 +11,7 @@ export default function Admission() {
 
   return (
     <section id="admission" style={{
-      background: 'var(--navy)',
+      background: 'var(--surface)',
       padding: '100px 40px',
       position: 'relative',
       overflow: 'hidden',
@@ -55,16 +31,16 @@ export default function Admission() {
             <p>Admissions 2026–27</p>
             <span />
           </div>
-          <h2 style={{
+            <h2 style={{
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(2rem, 4vw, 3rem)',
             fontWeight: 800,
-            color: 'var(--white)',
+              color: 'var(--navy)',
             marginTop: 12,
           }}>
             Join the <span style={{ color: 'var(--gold)' }}>Bright Family</span>
           </h2>
-          <p style={{ color: 'rgba(255,255,255,0.55)', marginTop: 12, fontSize: '0.97rem', maxWidth: 500, margin: '12px auto 0' }}>
+            <p style={{ color: 'var(--text-mid)', marginTop: 12, fontSize: '0.97rem', maxWidth: 500, margin: '12px auto 0' }}>
             Admissions are now open for Nursery to Class XII. Secure your child's future today.
           </p>
         </div>
@@ -80,7 +56,7 @@ export default function Admission() {
             <div key={i} style={{
               textAlign: 'center',
               padding: '28px 20px',
-              background: 'rgba(255,255,255,0.04)',
+                  background: 'var(--surface-soft)',
               border: '1px solid rgba(201,168,76,0.15)',
               borderRadius: 16,
               position: 'relative',
@@ -99,8 +75,8 @@ export default function Admission() {
                 color: 'var(--navy)', fontSize: '1rem',
                 margin: '0 auto 16px',
               }}>{s.n}</div>
-              <h4 style={{ color: 'var(--white)', fontWeight: 700, marginBottom: 8, fontSize: '0.95rem' }}>{s.title}</h4>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.82rem', lineHeight: 1.6 }}>{s.desc}</p>
+              <h4 style={{ color: 'var(--navy)', fontWeight: 700, marginBottom: 8, fontSize: '0.95rem' }}>{s.title}</h4>
+              <p style={{ color: 'var(--text-mid)', fontSize: '0.82rem', lineHeight: 1.6 }}>{s.desc}</p>
             </div>
           ))}
         </div>
@@ -117,11 +93,11 @@ export default function Admission() {
               fontFamily: 'var(--font-display)',
               fontSize: '2rem',
               fontWeight: 800,
-              color: 'var(--white)',
+              color: 'var(--navy)',
               marginBottom: 16,
             }}>Admission Inquiry</h3>
-            <p style={{ color: 'rgba(255,255,255,0.5)', marginBottom: 32, lineHeight: 1.7, fontSize: '0.92rem' }}>
-              Fill out the form and our team will get in touch with you within 24 hours to guide you through the admission process.
+            <p style={{ color: 'var(--text-mid)', marginBottom: 32, lineHeight: 1.7, fontSize: '0.92rem' }}>
+              Use the form below to submit your admission inquiry directly to our admissions team.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {[
@@ -131,59 +107,29 @@ export default function Admission() {
               ].map(c => (
                 <div key={c.label} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                   <span style={{ fontSize: '1.3rem' }}>{c.icon}</span>
-                  <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.92rem' }}>{c.label}</span>
+                  <span style={{ color: 'var(--text-mid)', fontSize: '0.92rem' }}>{c.label}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <form onSubmit={submit}>
-            {sent && (
-              <div style={{
-                background: 'rgba(39,174,96,0.15)',
-                border: '1px solid rgba(39,174,96,0.4)',
-                borderRadius: 10,
-                padding: '14px 20px',
-                color: '#2ecc71',
-                marginBottom: 20,
-                fontSize: '0.9rem',
-              }}>
-                ✅ Thank you! We'll contact you shortly.
-              </div>
-            )}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
-              <input name="name" value={form.name} onChange={handle} placeholder="Parent/Guardian Name" required style={inputStyle}
-                onFocus={e => e.target.style.borderColor = 'var(--gold)'}
-                onBlur={e => e.target.style.borderColor = 'rgba(201,168,76,0.25)'}
-              />
-              <input name="phone" value={form.phone} onChange={handle} placeholder="Mobile Number" required style={inputStyle}
-                onFocus={e => e.target.style.borderColor = 'var(--gold)'}
-                onBlur={e => e.target.style.borderColor = 'rgba(201,168,76,0.25)'}
-              />
-            </div>
-            <input name="email" value={form.email} onChange={handle} placeholder="Email Address" style={{ ...inputStyle, marginBottom: 14 }}
-              onFocus={e => e.target.style.borderColor = 'var(--gold)'}
-              onBlur={e => e.target.style.borderColor = 'rgba(201,168,76,0.25)'}
+          <div style={{ minWidth: 0 }}>
+            <iframe
+              title="Admission Google Form"
+              src="https://docs.google.com/forms/d/e/1FAIpQLSd1M3Cy-Vsndu2b2udEm84xHGeRBXFeVTtMFsHqSjie-aIQbA/viewform?embedded=true"
+              width="100%"
+              height="1025"
+              frameBorder="0"
+              marginHeight="0"
+              marginWidth="0"
+              style={{
+                borderRadius: 20,
+                border: '1px solid rgba(201,168,76,0.18)',
+                minHeight: 700,
+                background: 'white'
+              }}
             />
-            <select name="class" value={form.class} onChange={handle} required style={{ ...inputStyle, marginBottom: 14 }}
-              onFocus={e => e.target.style.borderColor = 'var(--gold)'}
-              onBlur={e => e.target.style.borderColor = 'rgba(201,168,76,0.25)'}
-            >
-              <option value="" disabled>Select Class for Admission</option>
-              {['Nursery', 'LKG', 'UKG', 'Class I', 'Class II', 'Class III', 'Class IV', 'Class V',
-                'Class VI', 'Class VII', 'Class VIII', 'Class IX', 'Class X', 'Class XI', 'Class XII'].map(c => (
-                <option key={c} value={c} style={{ background: '#0A1628' }}>{c}</option>
-              ))}
-            </select>
-            <textarea name="message" value={form.message} onChange={handle} placeholder="Any specific query or message..." rows={4}
-              style={{ ...inputStyle, resize: 'vertical', marginBottom: 20 }}
-              onFocus={e => e.target.style.borderColor = 'var(--gold)'}
-              onBlur={e => e.target.style.borderColor = 'rgba(201,168,76,0.25)'}
-            />
-            <button type="submit" className="btn-gold" style={{ width: '100%', justifyContent: 'center', padding: 16 }}>
-              Submit Inquiry →
-            </button>
-          </form>
+          </div>
         </div>
       </div>
 

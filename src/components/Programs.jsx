@@ -49,7 +49,7 @@ export default function Programs() {
 
   return (
     <section id="programs" style={{
-      background: 'var(--navy)',
+      background: 'var(--surface)',
       padding: '100px 40px',
       position: 'relative',
       overflow: 'hidden',
@@ -72,13 +72,13 @@ export default function Programs() {
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(2rem, 4vw, 3rem)',
             fontWeight: 800,
-            color: 'var(--white)',
+            color: 'var(--navy)',
             lineHeight: 1.2,
             marginTop: 12,
           }}>
             Education for Every Stage
           </h2>
-          <p style={{ color: 'rgba(255,255,255,0.5)', marginTop: 12, fontSize: '0.97rem', maxWidth: 500, margin: '12px auto 0' }}>
+          <p style={{ color: 'var(--text-mid)', marginTop: 12, fontSize: '0.97rem', maxWidth: 500, margin: '12px auto 0' }}>
             From first steps to final year — a complete learning journey under one roof.
           </p>
         </div>
@@ -117,7 +117,7 @@ export default function Programs() {
           gridTemplateColumns: '1fr 1fr',
           gap: 48,
           alignItems: 'center',
-          background: 'rgba(255,255,255,0.03)',
+          background: 'var(--surface-soft)',
           border: '1px solid rgba(255,255,255,0.08)',
           borderRadius: 20,
           padding: '48px 56px',
