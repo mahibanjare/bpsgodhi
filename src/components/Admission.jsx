@@ -46,7 +46,7 @@ export default function Admission() {
         </div>
 
         {/* Steps */}
-        <div style={{
+        <div className="admission-steps" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
           gap: 24,
@@ -82,7 +82,7 @@ export default function Admission() {
         </div>
 
         {/* Form */}
-        <div style={{
+        <div className="admission-grid" style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           gap: 64,
@@ -118,15 +118,16 @@ export default function Admission() {
               title="Admission Google Form"
               src="https://docs.google.com/forms/d/e/1FAIpQLSd1M3Cy-Vsndu2b2udEm84xHGeRBXFeVTtMFsHqSjie-aIQbA/viewform?embedded=true"
               width="100%"
-              height="1025"
+              height="820"
               frameBorder="0"
               marginHeight="0"
               marginWidth="0"
               style={{
                 borderRadius: 20,
                 border: '1px solid rgba(201,168,76,0.18)',
-                minHeight: 700,
-                background: 'white'
+                minHeight: 560,
+                background: 'white',
+                display: 'block',
               }}
             />
           </div>
@@ -135,9 +136,21 @@ export default function Admission() {
 
       <style>{`
         @media (max-width: 900px) {
-          #admission > div > div:last-child { grid-template-columns: 1fr !important; gap: 40px !important; }
-          #admission > div > div:nth-child(3) { grid-template-columns: repeat(2, 1fr) !important; }
           #admission { padding: 60px 20px !important; }
+          #admission .admission-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          #admission .admission-grid > div:first-child { order: 1; }
+          #admission .admission-grid > div:last-child { order: 2; }
+          #admission .admission-steps { grid-template-columns: repeat(2, 1fr) !important; }
+          #admission iframe { height: 780px !important; }
+        }
+        @media (max-width: 600px) {
+          #admission .admission-grid { gap: 24px !important; }
+          #admission .admission-steps { grid-template-columns: 1fr !important; }
+          #admission iframe { height: 920px !important; }
+        }
+        @media (max-width: 600px) {
+          #admission .admission-grid { gap: 24px !important; }
+          #admission iframe { height: 920px !important; }
         }
       `}</style>
     </section>

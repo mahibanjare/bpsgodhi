@@ -45,7 +45,7 @@ export default function Hero() {
         <div style={{ position:'absolute', right:'25%', top:'15%', width:6, height:6, borderRadius:'50%', background:'var(--gold)', opacity:0.4, animation:'float 5s ease-in-out infinite 0.5s' }} />
       </div>
 
-      <div style={{
+      <div className="hero-grid" style={{
         maxWidth: 1200,
         margin: '0 auto',
         padding: '80px 40px',
@@ -173,15 +173,15 @@ export default function Hero() {
               { icon: '📞', label: 'Contact', value: '91651 87777' },
             ].map(c => (
               <div key={c.label} style={{
-                background: 'rgba(255,255,255,0.04)',
+                background: 'rgba(10,22,40,0.04)',
                 border: '1px solid rgba(201,168,76,0.15)',
                 borderRadius: 8,
                 padding: '16px 20px',
                 backdropFilter: 'blur(10px)',
               }}>
                 <div style={{ fontSize: '1.4rem', marginBottom: 6 }}>{c.icon}</div>
-                <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 4 }}>{c.label}</div>
-                <div style={{ fontSize: '0.95rem', color: 'var(--gold)', fontWeight: 600 }}>{c.value}</div>
+                <div style={{ fontSize: '0.7rem', color: 'var(--text-light)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 4 }}>{c.label}</div>
+                <div style={{ fontSize: '0.95rem', color: 'var(--navy)', fontWeight: 600 }}>{c.value}</div>
               </div>
             ))}
           </div>
@@ -202,8 +202,9 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 900px) {
-          #home > div > div:first-child { grid-template-columns: 1fr !important; gap: 40px !important; }
-          #home > div > div:last-child { display: none !important; }
+          #home .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          #home .hero-grid > div { width: 100%; }
+          #home .hero-grid > div:last-child { padding-top: 24px; }
         }
         @media (max-width: 600px) {
           #home > div { padding: 60px 20px !important; }

@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div style={{
+      <div className="top-bar" style={{
         background: 'var(--surface)',
         color: 'var(--text-mid)',
         fontSize: '0.78rem',
@@ -34,7 +34,7 @@ export default function Navbar() {
         letterSpacing: '0.03em',
       }}>
         <span>📍 Godhi, Mandir Hasaud, Naya Raipur, Chhattisgarh</span>
-        <span style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
+        <span style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
           <a href="tel:+919165187777" style={{ color: 'var(--gold)', textDecoration: 'none', fontWeight: 600 }}>
             📞 91651 87777
           </a>
@@ -141,9 +141,11 @@ export default function Navbar() {
         @media (max-width: 900px) {
           .nav-links { display: none !important; }
           .hamburger { display: block !important; }
+          .top-bar { display: none !important; }
         }
         @media (max-width: 600px) {
-          nav { padding: 0 20px !important; }
+          nav { padding: 0 16px !important; }
+          nav { height: auto !important; }
         }
       `}</style>
     </>

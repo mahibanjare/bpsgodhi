@@ -32,6 +32,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
@@ -40,6 +41,37 @@ body {
   color: var(--text-dark);
   overflow-x: hidden;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button, input, select, textarea, a {
+  font-family: inherit;
+}
+
+img, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(201,168,76,0.4);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  html { font-size: 15px; }
+  .btn-gold, .btn-outline {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  html { font-size: 14px; }
+  body { line-height: 1.7; }
 }
 
 /* Scrollbar */

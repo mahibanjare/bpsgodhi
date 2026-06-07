@@ -107,7 +107,7 @@ export default function About() {
             </p>
 
             {/* Feature list */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 36 }}>
+            <div className="feature-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 36 }}>
               {[
                 'CGBSE Pattern Curriculum',
                 'Experienced Faculty',
@@ -132,7 +132,7 @@ export default function About() {
               ))}
             </div>
 
-            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+            <div className="cta-group" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <a href="#programs" className="btn-gold">Our Programs</a>
               <a href="#contact" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
@@ -154,6 +154,9 @@ export default function About() {
         @media (max-width: 900px) {
           #about > div > div { grid-template-columns: 1fr !important; gap: 40px !important; }
           #about { padding: 60px 20px !important; }
+          #about .feature-grid { grid-template-columns: 1fr !important; }
+          #about .cta-group { flex-direction: column !important; }
+          #about .cta-group a { width: 100%; justify-content: center; }
         }
       `}</style>
     </section>

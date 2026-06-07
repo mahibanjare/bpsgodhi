@@ -43,7 +43,7 @@ export default function Testimonials() {
   }, [])
 
   return (
-    <section style={{
+    <section id="testimonials" style={{
       background: 'var(--surface)',
       padding: '100px 40px',
       position: 'relative',
@@ -126,7 +126,7 @@ export default function Testimonials() {
               {testimonials[active].avatar}
             </div>
             <div>
-              <div style={{ color: 'var(--white)', fontWeight: 600, fontSize: '1rem' }}>{testimonials[active].name}</div>
+              <div style={{ color: 'var(--navy)', fontWeight: 600, fontSize: '1rem' }}>{testimonials[active].name}</div>
               <div style={{ color: 'var(--gold)', fontSize: '0.82rem', marginTop: 2 }}>{testimonials[active].role}</div>
             </div>
           </div>
@@ -149,8 +149,13 @@ export default function Testimonials() {
       </div>
 
       <style>{`
+        @media (max-width: 900px) {
+          #testimonials { padding: 70px 20px !important; }
+          #testimonials > div { padding: 0 10px; }
+          #testimonials > div > div:nth-child(2) { padding: 32px 24px !important; }
+        }
         @media (max-width: 600px) {
-          section > div > div[style*="padding: 48px 56px"] { padding: 32px 24px !important; }
+          #testimonials > div > div:nth-child(2) { padding: 28px 20px !important; }
         }
       `}</style>
     </section>

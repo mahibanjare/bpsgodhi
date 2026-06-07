@@ -87,18 +87,34 @@ export default function Footer() {
             </p>
             <div style={{ display: 'flex', gap: 12 }}>
               {[
-                { name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61590216284968', icon: 'f' },
-                { name: 'Instagram', url: 'https://www.instagram.com/brightpublic.school/', icon: '📷' },
-                { name: 'YouTube', url: 'https://www.youtube.com/@BrightPublicSchoolGodhi', icon: '▶' }
+                { name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61590216284968', icon: (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z" />
+                  </svg>
+                ) },
+                { name: 'Instagram', url: 'https://www.instagram.com/brightpublic.school/', icon: (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm0 2h10c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3V7c0-1.66 1.34-3 3-3zm5 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.5-.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                  </svg>
+                ) },
+                { name: 'YouTube', url: 'https://www.youtube.com/@BrightPublicSchoolGodhi', icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21.8 7.2c-.2-.7-.8-1.2-1.6-1.4C18.1 5.6 12 5.6 12 5.6s-6.1 0-8.2.2c-.7.2-1.3.7-1.6 1.4C2 9.4 2 12 2 12s0 2.6.2 4.8c.2.7.8 1.2 1.6 1.4 2.1.2 8.2.2 8.2.2s6.1 0 8.2-.2c.7-.2 1.3-.7 1.6-1.4.2-2.2.2-4.8.2-4.8s0-2.6-.2-4.8z" fill="currentColor" opacity="0.96" />
+                    <path d="M10 15.3l5.2-3.3L10 8.7v6.6z" fill="white" />
+                  </svg>
+                ) }
               ].map(social => (
-                <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" title={social.name} style={{
-                  width: 38, height: 38, borderRadius: '50%',
+                <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" title={social.name} aria-label={social.name} style={{
+                  width: 44, height: 44, borderRadius: 14,
                   background: 'var(--surface)',
                   border: '1px solid rgba(201,168,76,0.18)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'var(--navy)', fontSize: '0.95rem',
+                  color: 'var(--navy)', fontSize: '1rem',
                   textDecoration: 'none',
-                }}>
+                  transition: 'all 0.25s ease',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'var(--gold)'; e.currentTarget.style.color = 'var(--navy)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'var(--surface)'; e.currentTarget.style.color = 'var(--navy)'; }}>
                   {social.icon}
                 </a>
               ))}
@@ -183,12 +199,15 @@ export default function Footer() {
 
       <style>{`
         @media (max-width: 900px) {
+          footer > div > div:first-child { flex-direction: column !important; align-items: flex-start !important; text-align: left !important; }
+          footer > div > div:first-child > div:last-child { width: 100% !important; justify-content: flex-start !important; }
+          footer > div > div:first-child > div:last-child > a { width: auto !important; flex: 1 1 auto !important; }
           footer > div > div:nth-child(2) { grid-template-columns: 1fr 1fr !important; padding: 40px 0 0 !important; }
-          footer > div > div:first-child { padding: 32px 0 0 !important; }
           footer > div > div:last-child { flex-direction: column !important; text-align: center !important; }
         }
         @media (max-width: 600px) {
           footer > div > div:nth-child(2) { grid-template-columns: 1fr !important; }
+          footer > div > div:first-child { gap: 16px !important; }
         }
       `}</style>
     </footer>

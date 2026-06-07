@@ -95,9 +95,9 @@ export default function Programs() {
           {programs.map((p, i) => (
             <button key={i} onClick={() => setActive(i)} style={{
               padding: '10px 22px',
-              border: active === i ? `2px solid ${p.color}` : '2px solid rgba(255,255,255,0.1)',
-              background: active === i ? `${p.color}22` : 'transparent',
-              color: active === i ? p.color : 'rgba(255,255,255,0.5)',
+              border: active === i ? `2px solid ${p.color}` : '2px solid rgba(16,36,61,0.15)',
+              background: active === i ? `${p.color}22` : 'rgba(255,255,255,0.9)',
+              color: active === i ? p.color : 'var(--navy)',
               borderRadius: 40,
               cursor: 'pointer',
               fontSize: '0.85rem',
@@ -112,13 +112,13 @@ export default function Programs() {
         </div>
 
         {/* Content */}
-        <div style={{
+        <div className="program-card" style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           gap: 48,
           alignItems: 'center',
-          background: 'var(--surface-soft)',
-          border: '1px solid rgba(255,255,255,0.08)',
+          background: 'var(--surface)',
+          border: '1px solid rgba(16,36,61,0.08)',
           borderRadius: 20,
           padding: '48px 56px',
         }}>
@@ -140,10 +140,10 @@ export default function Programs() {
               fontFamily: 'var(--font-display)',
               fontSize: '2.2rem',
               fontWeight: 800,
-              color: 'var(--white)',
+              color: 'var(--navy)',
               marginBottom: 20,
             }}>{prog.title}</h3>
-            <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.85, marginBottom: 32, fontSize: '0.97rem' }}>
+            <p style={{ color: 'var(--text-mid)', lineHeight: 1.85, marginBottom: 32, fontSize: '0.97rem' }}>
               {prog.desc}
             </p>
             <a href="#admission" className="btn-gold">Enroll Now →</a>
@@ -161,7 +161,7 @@ export default function Programs() {
                   borderRadius: 8,
                 }}>
                   <div style={{ width: 6, height: 6, borderRadius: '50%', background: prog.color, flexShrink: 0 }} />
-                  <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.83rem', fontWeight: 500 }}>{f}</span>
+                  <span style={{ color: 'var(--text-dark)', fontSize: '0.83rem', fontWeight: 500 }}>{f}</span>
                 </div>
               ))}
             </div>
@@ -171,8 +171,15 @@ export default function Programs() {
 
       <style>{`
         @media (max-width: 900px) {
-          #programs > div > div:last-child { grid-template-columns: 1fr !important; padding: 32px !important; }
+          #programs > div > div:first-child { grid-template-columns: 1fr !important; }
           #programs { padding: 60px 20px !important; }
+          #programs .program-card { grid-template-columns: 1fr !important; padding: 32px 24px !important; }
+          #programs .program-card > div:last-child { order: 2; }
+          #programs .program-card > div:first-child { order: 1; }
+          #programs .program-card div[style*="display: grid"] { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 600px) {
+          #programs .program-card { gap: 24px !important; }
         }
       `}</style>
     </section>
