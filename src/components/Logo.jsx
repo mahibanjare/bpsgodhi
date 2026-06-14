@@ -1,12 +1,13 @@
-// Logo.jsx ko poora replace karo isse:
 export default function Logo({ size = 56 }) {
   return (
-    <img 
-      src="/logo.png"        // ← apna logo file naam
-      alt="Bright Public School Logo"
+    <img
+      src="/logo-web.png"
+      alt="Bright Public School emblem"
       width={size}
       height={size}
-      style={{ objectFit: 'contain' }}
+      loading="eager"
+      decoding="async"
+      style={{ objectFit: 'contain', display: 'block' }}
     />
   )
 }

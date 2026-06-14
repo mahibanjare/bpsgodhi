@@ -11,8 +11,12 @@ import Admission from './components/Admission'
 import Gallery from './components/Gallery'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import FloatingActions from './components/FloatingActions'
+import useScrollReveal from './hooks/useScrollReveal'
 
 export default function App() {
+  useScrollReveal()
+
   return (
     <>
       <Navbar />
@@ -29,6 +33,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <FloatingActions />
     </>
   )
 }

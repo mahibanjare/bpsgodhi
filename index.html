@@ -2,8 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Line 5 mein -->
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0A1628" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary SEO -->
@@ -25,13 +27,17 @@
     <meta property="og:url" content="https://bpsgodhi.in/" />
     <meta property="og:title" content="Bright Public School | CGBSE English Medium | Naya Raipur" />
     <meta property="og:description" content="Premier CGBSE English Medium School in Naya Raipur, Chhattisgarh. Nursery to Class 12. Call: 91651 87777" />
-    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:image" content="https://bpsgodhi.in/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Bright Public School" />
     <meta property="og:locale" content="en_IN" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Bright Public School | CGBSE Naya Raipur" />
     <meta name="twitter:description" content="Premier CGBSE English Medium School in Naya Raipur, Chhattisgarh." />
+    <meta name="twitter:image" content="https://bpsgodhi.in/og-image.jpg" />
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -41,7 +47,10 @@
       "name": "Bright Public School",
       "description": "CGBSE English Medium School offering Nursery to Class 12",
       "url": "https://bpsgodhi.in",
+      "logo": "https://bpsgodhi.in/logo-web.png",
+      "image": "https://bpsgodhi.in/og-image.jpg",
       "telephone": "+919165187777",
+      "foundingDate": "2018",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Godhi, Mandir Hasaud",
@@ -58,14 +67,21 @@
       "openingHours": "Mo-Sa 08:00-14:00",
       "priceRange": "$$",
       "currenciesAccepted": "INR",
-      "sameAs": []
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590216284968",
+        "https://www.instagram.com/brightpublic.school/",
+        "https://www.youtube.com/@BrightPublicSchoolGodhi"
+      ]
     }
     </script>
+
+    <!-- Performance: preload hero image -->
+    <link rel="preload" as="image" href="/campus.jpg" fetchpriority="high" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,600;1,400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,400&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
