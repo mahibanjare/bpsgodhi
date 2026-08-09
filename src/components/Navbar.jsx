@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { MapPin, Phone, Clock, Menu, X } from 'lucide-react'
 import Logo from './Logo'
+import { useSite } from '../SiteContext'
+import { fmtPhone, telPhone } from '../siteConfig'
 
 const links = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Programs', href: '#programs' },
   { label: 'Facilities', href: '#facilities' },
+  { label: 'Fees', href: '#fees' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'Admission', href: '#admission' },
   { label: 'Contact', href: '#contact' },
 ]
 
 export default function Navbar() {
+  const { phone } = useSite()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('home')
@@ -56,8 +60,8 @@ export default function Navbar() {
           <MapPin size={13} color="var(--gold)" /> Godhi, Mandir Hasaud, Naya Raipur, Chhattisgarh
         </span>
         <span style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
-          <a href="tel:+919165187777" style={{ color: 'var(--gold)', textDecoration: 'none', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-            <Phone size={13} /> 91651 87777
+          <a href={`tel:${telPhone(phone)}`} style={{ color: 'var(--gold)', textDecoration: 'none', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            <Phone size={13} /> {fmtPhone(phone)}
           </a>
           <span style={{ opacity: 0.4 }}>|</span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>

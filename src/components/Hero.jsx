@@ -1,15 +1,19 @@
 import React from 'react'
 import { ArrowRight, Landmark, BookOpen, GraduationCap, Phone, ShieldCheck } from 'lucide-react'
 import Logo from './Logo'
-
-const infoCards = [
-  { icon: Landmark, label: 'Affiliated Board', value: 'CGBSE' },
-  { icon: BookOpen, label: 'Medium', value: 'English' },
-  { icon: GraduationCap, label: 'Classes', value: 'Nursery–XII' },
-  { icon: Phone, label: 'Contact', value: '91651 87777' },
-]
+import { useSite } from '../SiteContext'
+import { fmtPhone } from '../siteConfig'
 
 export default function Hero() {
+  const { session, phone } = useSite()
+
+  const infoCards = [
+    { icon: Landmark, label: 'Affiliated Board', value: 'CGBSE' },
+    { icon: BookOpen, label: 'Medium', value: 'English' },
+    { icon: GraduationCap, label: 'Classes', value: 'Nursery–XII' },
+    { icon: Phone, label: 'Contact', value: fmtPhone(phone) },
+  ]
+
   return (
     <section id="home" style={{
       minHeight: '100vh',
@@ -124,7 +128,7 @@ export default function Hero() {
               position: 'absolute', left: 18, bottom: 16, display: 'flex', alignItems: 'center', gap: 8,
               color: '#fff', fontSize: '0.8rem', fontWeight: 600, textShadow: '0 1px 4px rgba(0,0,0,0.5)',
             }}>
-              <ShieldCheck size={16} color="var(--gold)" /> Admissions Open 2026–27
+              <ShieldCheck size={16} color="var(--gold)" /> Admissions Open {session}
             </div>
           </div>
 

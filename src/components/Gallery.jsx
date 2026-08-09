@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { MonitorPlay, FlaskConical, Medal, Trophy, PartyPopper, Flag, Music, BookOpen } from 'lucide-react'
+import { useSite } from '../SiteContext'
 
 const categories = ['All', 'Campus', 'Classrooms', 'Sports', 'Events', 'Cultural']
 
-const items = [
+const defaultItems = [
   { label: 'Campus Entrance', cat: 'Campus', photo: '/campus.png', featured: true },
   { label: 'Smart Classroom', cat: 'Classrooms', Icon: MonitorPlay, from: '#1E3A5F', to: '#0A1628' },
   { label: 'Science Lab', cat: 'Classrooms', Icon: FlaskConical, from: '#1a3a4a', to: '#0e2230' },
@@ -16,7 +17,14 @@ const items = [
 ]
 
 export default function Gallery() {
+  const { gallery } = useSite()
   const [cat, setCat] = useState('All')
+
+  // Admin-managed gallery (if set) — first photo becomes the featured wide tile
+  const items = gallery?.length
+    ? gallery.map((g, i) => ({ label: g.label, cat: g.cat, photo: g.image, featured: i === 0 }))
+    : defaultItems
+
   const filtered = cat === 'All' ? items : items.filter(i => i.cat === cat)
 
   return (
@@ -47,7 +55,7 @@ export default function Gallery() {
           {filtered.map((item, i) => {
             const big = item.featured
             return (
-              <figure key={item.label} className="reveal" style={{
+              <figure key={`${item.label}-${i}`} className="reveal" style={{
                 margin: 0,
                 aspectRatio: big ? '2 / 1' : '4 / 3',
                 gridColumn: big ? 'span 2' : 'span 1',

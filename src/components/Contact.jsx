@@ -1,14 +1,18 @@
 import React from 'react'
 import { MapPin, Phone, Clock, Landmark } from 'lucide-react'
-
-const cards = [
-  { Icon: MapPin, title: 'Address', lines: ['Godhi, Mandir Hasaud,', 'Naya Raipur, Chhattisgarh'] },
-  { Icon: Phone, title: 'Phone', lines: ['+91 91651 87777'], isPhone: true },
-  { Icon: Clock, title: 'School Hours', lines: ['Monday – Saturday', '8:00 AM – 2:00 PM'] },
-  { Icon: Landmark, title: 'Board Affiliation', lines: ['Chhattisgarh Board of', 'Secondary Education (CGBSE)'] },
-]
+import { useSite } from '../SiteContext'
+import { fmtPhone, telPhone } from '../siteConfig'
 
 export default function Contact() {
+  const { phone } = useSite()
+
+  const cards = [
+    { Icon: MapPin, title: 'Address', lines: ['Godhi, Mandir Hasaud,', 'Naya Raipur, Chhattisgarh'] },
+    { Icon: Phone, title: 'Phone', lines: [`+91 ${fmtPhone(phone)}`], isPhone: true },
+    { Icon: Clock, title: 'School Hours', lines: ['Monday – Saturday', '8:00 AM – 2:00 PM'] },
+    { Icon: Landmark, title: 'Board Affiliation', lines: ['Chhattisgarh Board of', 'Secondary Education (CGBSE)'] },
+  ]
+
   return (
     <section id="contact" className="section" style={{ background: 'var(--cream)' }}>
       <div className="container">
@@ -36,7 +40,7 @@ export default function Contact() {
                   <div style={{ fontWeight: 700, color: 'var(--navy)', marginBottom: 6, fontSize: '0.92rem' }}>{c.title}</div>
                   {c.lines.map((l, i) => (
                     c.isPhone
-                      ? <a key={i} href="tel:+919165187777" style={{ display: 'block', color: 'var(--gold)', fontWeight: 700, fontSize: '1.05rem', textDecoration: 'none' }}>{l}</a>
+                      ? <a key={i} href={`tel:${telPhone(phone)}`} style={{ display: 'block', color: 'var(--gold)', fontWeight: 700, fontSize: '1.05rem', textDecoration: 'none' }}>{l}</a>
                       : <div key={i} style={{ color: 'var(--text-mid)', fontSize: '0.87rem', lineHeight: 1.6 }}>{l}</div>
                   ))}
                 </div>
@@ -47,9 +51,9 @@ export default function Contact() {
           <div className="reveal reveal-right" style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-navy)', border: '3px solid rgba(201,168,76,0.2)' }}>
             <iframe
               title="Bright Public School location map"
-              src="https://maps.google.com/maps?q=21.2494674,81.845539&z=18&output=embed&hl=en"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d883.6411213687481!2d81.84489526954833!3d21.24946739877846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x49a388b1014b1857%3A0xc8040a05b8c0c96a!2sBright%20Public%20School%20Godhi!5e1!3m2!1sen!2sin!4v1786277852640!5m2!1sen!2sin"
               width="100%" height="470" style={{ border: 0, display: 'block', minHeight: 360 }}
-              allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen loading="lazy" referrerPolicy="strict-origin-when-cross-origin"
             />
           </div>
         </div>

@@ -1,5 +1,7 @@
 import React from 'react'
 import { ClipboardList, School, FileCheck2, PartyPopper, Phone, MapPin, Clock, ChevronRight } from 'lucide-react'
+import { useSite } from '../SiteContext'
+import { fmtPhone, telPhone } from '../siteConfig'
 
 const steps = [
   { n: '01', Icon: ClipboardList, title: 'Fill Inquiry Form', desc: 'Complete the online inquiry form with your details.' },
@@ -8,13 +10,15 @@ const steps = [
   { n: '04', Icon: PartyPopper, title: 'Welcome Aboard!', desc: 'Your child joins the Bright Public School family.' },
 ]
 
-const contacts = [
-  { Icon: Phone, label: '91651 87777' },
-  { Icon: MapPin, label: 'Godhi, Mandir Hasaud, Naya Raipur, CG' },
-  { Icon: Clock, label: 'Mon–Sat: 8:00 AM – 2:00 PM' },
-]
-
 export default function Admission() {
+  const { session, phone } = useSite()
+
+  const contacts = [
+    { Icon: Phone, label: fmtPhone(phone) },
+    { Icon: MapPin, label: 'Godhi, Mandir Hasaud, Naya Raipur, CG' },
+    { Icon: Clock, label: 'Mon–Sat: 8:00 AM – 2:00 PM' },
+  ]
+
   return (
     <section id="admission" className="section" style={{ background: 'var(--surface)' }}>
       <div style={{
@@ -24,7 +28,7 @@ export default function Admission() {
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <div className="section-head reveal">
-          <div className="eyebrow"><span /><p>Admissions 2026–27</p><span /></div>
+          <div className="eyebrow"><span /><p>Admissions {session}</p><span /></div>
           <h2 className="section-title">Join the <span className="accent">Bright Family</span></h2>
           <p className="section-subtitle">Admissions are now open for Nursery to Class XII. Secure your child's future today.</p>
         </div>
@@ -81,7 +85,7 @@ export default function Admission() {
                 </div>
               ))}
             </div>
-            <a href="tel:+919165187777" className="btn-gold" style={{ marginTop: 28 }}>
+            <a href={`tel:${telPhone(phone)}`} className="btn-gold" style={{ marginTop: 28 }}>
               <Phone size={16} /> Call Admissions
             </a>
           </div>

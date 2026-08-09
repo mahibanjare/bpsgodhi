@@ -1,17 +1,20 @@
 import React from 'react'
-
-const items = [
-  '🌟 Admissions Open 2026–27',
-  '📚 CGBSE Affiliated English Medium School',
-  '🏆 Excellence in Education',
-  '🎨 Co-curricular Activities',
-  '💻 Smart Classrooms',
-  '🌿 Eco-Friendly Campus',
-  '🏅 Sports & Cultural Programs',
-  '📞 Call: 91651 87777',
-]
+import { useSite } from '../SiteContext'
+import { fmtPhone } from '../siteConfig'
 
 export default function Marquee() {
+  const { session, phone } = useSite()
+
+  const items = [
+    `🌟 Admissions Open ${session}`,
+    '📚 CGBSE Affiliated English Medium School',
+    '🏆 Excellence in Education',
+    '🎨 Co-curricular Activities',
+    '💻 Smart Classrooms',
+    '🌿 Eco-Friendly Campus',
+    '🏅 Sports & Cultural Programs',
+    `📞 Call: ${fmtPhone(phone)}`,
+  ]
   const doubled = [...items, ...items]
   return (
     <div className="bps-marquee" style={{

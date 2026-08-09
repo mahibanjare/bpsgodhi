@@ -1,6 +1,8 @@
 import React from 'react'
 import { Facebook, Instagram, Youtube, MapPin, Phone, Clock, ChevronRight, ArrowRight } from 'lucide-react'
 import Logo from './Logo'
+import { useSite } from '../SiteContext'
+import { fmtPhone, telPhone } from '../siteConfig'
 
 const socials = [
   { name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61590216284968', Icon: Facebook },
@@ -10,12 +12,13 @@ const socials = [
 
 const quickLinks = [
   ['Home', '#home'], ['About Us', '#about'], ['Programs', '#programs'],
-  ['Facilities', '#facilities'], ['Gallery', '#gallery'], ['Contact', '#contact'],
+  ['Facilities', '#facilities'], ['Fee Structure', '#fees'], ['Gallery', '#gallery'], ['Contact', '#contact'],
 ]
 
-const classes = ['Nursery · LKG · UKG', 'Primary (I–V)', 'Middle (VI–VIII)', 'Secondary (IX–X)', 'Sr. Secondary (XI–XII)', 'Science / Commerce / Arts']
+const classes = ['Nursery · LKG · UKG', 'Primary (I–V)', 'Middle (VI–VIII)', 'Secondary (IX–X)', 'Sr. Secondary (XI–XII)']
 
 export default function Footer() {
+  const { session, phone } = useSite()
   const year = new Date().getFullYear()
 
   return (
@@ -34,14 +37,14 @@ export default function Footer() {
           }} />
           <div style={{ position: 'relative' }}>
             <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', fontWeight: 800, color: '#fff', marginBottom: 8 }}>
-              Admissions Open for 2026–27
+              Admissions Open for {session}
             </h3>
             <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.97rem', margin: 0 }}>
               Nursery to Class XII · CGBSE · English Medium · Call us today!
             </p>
           </div>
           <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', position: 'relative' }}>
-            <a href="tel:+919165187777" className="btn-gold"><Phone size={16} /> 91651 87777</a>
+            <a href={`tel:${telPhone(phone)}`} className="btn-gold"><Phone size={16} /> {fmtPhone(phone)}</a>
             <a href="#admission" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 26px',
               background: 'transparent', border: '2px solid rgba(255,255,255,0.4)', color: '#fff',
@@ -114,7 +117,7 @@ export default function Footer() {
               </div>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                 <Phone size={16} color="var(--gold)" style={{ flexShrink: 0 }} />
-                <a href="tel:+919165187777" style={{ color: 'var(--navy)', textDecoration: 'none', fontWeight: 700, fontSize: '0.92rem' }}>91651 87777</a>
+                <a href={`tel:${telPhone(phone)}`} style={{ color: 'var(--navy)', textDecoration: 'none', fontWeight: 700, fontSize: '0.92rem' }}>{fmtPhone(phone)}</a>
               </div>
               <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                 <Clock size={16} color="var(--gold)" style={{ flexShrink: 0, marginTop: 2 }} />
