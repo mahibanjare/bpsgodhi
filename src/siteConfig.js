@@ -6,9 +6,12 @@
  * merged over the defaults — so admin changes reach every visitor.
  */
 
-// ── Supabase connection (filled in once the school's Supabase project is ready) ──
-export const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || ''
-export const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+// ── Supabase connection ──
+// The anon (publishable) key is safe to ship in the bundle — it is designed to be
+// public; all writes are gated by the admin password inside the database RPC.
+export const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://ohzdpxnjafjmafdgvbax.supabase.co'
+export const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY ||
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oemRweG5qYWZqbWFmZGd2YmF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyNzA1NjAsImV4cCI6MjEwMTg0NjU2MH0.hd-lOwFXqn-T90IDhSWHo-2cDJUEW2H5h6-nLQNSIQs'
 
 export const BACKEND_READY = Boolean(SUPABASE_URL && SUPABASE_KEY)
 
