@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {
   Lock, LogOut, Save, Settings, UserRound, IndianRupee, Bell, Image as ImageIcon,
   FileText, KeyRound, Trash2, Plus, CheckCircle2, AlertTriangle, ArrowLeft, Upload,
-  Eye, EyeOff,
+  Eye, EyeOff, MonitorSmartphone,
 } from 'lucide-react'
 import { useSite } from '../SiteContext'
 import { adminExec, BACKEND_READY, fmtPhone } from '../siteConfig'
@@ -216,7 +216,11 @@ export default function Admin() {
             <div style={{ color: 'var(--gold)', fontSize: '0.66rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Bright Public School, Godhi</div>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 10 }}>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          <a href="https://bpsgodhi-webapp.vercel.app" target="_blank" rel="noopener noreferrer" title="BPS School ERP kholein"
+            style={{ ...btnSm, background: 'rgba(255,255,255,0.12)', color: 'var(--gold)', textDecoration: 'none' }}>
+            <MonitorSmartphone size={15} /> School ERP
+          </a>
           <button onClick={saveAll} disabled={busy} style={{ ...btnSm, background: 'linear-gradient(90deg, var(--gold), var(--sun))', color: 'var(--navy)', padding: '10px 20px', opacity: busy ? 0.7 : 1 }}>
             <Save size={15} /> {busy ? 'Saving…' : 'Save Changes'}
           </button>
