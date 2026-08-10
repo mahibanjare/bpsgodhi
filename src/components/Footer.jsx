@@ -10,7 +10,7 @@ const socials = [
   { name: 'YouTube', url: 'https://www.youtube.com/@BrightPublicSchoolGodhi', Icon: Youtube },
 ]
 
-const quickLinks = [
+const allQuickLinks = [
   ['Home', '#home'], ['About Us', '#about'], ['Programs', '#programs'],
   ['Facilities', '#facilities'], ['Fee Structure', '#fees'], ['Gallery', '#gallery'], ['Contact', '#contact'],
 ]
@@ -18,7 +18,8 @@ const quickLinks = [
 const classes = ['Nursery · LKG · UKG', 'Primary (I–V)', 'Middle (VI–VIII)', 'Secondary (IX–X)', 'Sr. Secondary (XI–XII)']
 
 export default function Footer() {
-  const { session, phone } = useSite()
+  const { session, phone, showFees } = useSite()
+  const quickLinks = allQuickLinks.filter(([, href]) => href !== '#fees' || showFees !== false)
   const year = new Date().getFullYear()
 
   return (

@@ -4,7 +4,8 @@ import { useSite } from '../SiteContext'
 import { fmtPhone, telPhone } from '../siteConfig'
 
 export default function Fees() {
-  const { fees, feesNote, session, phone } = useSite()
+  const { fees, feesNote, session, phone, showFees } = useSite()
+  if (showFees === false || !fees?.length) return null
 
   return (
     <section id="fees" className="section" style={{ background: 'var(--off-white)' }}>

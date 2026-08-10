@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import {
   Lock, LogOut, Save, Settings, UserRound, IndianRupee, Bell, Image as ImageIcon,
   FileText, KeyRound, Trash2, Plus, CheckCircle2, AlertTriangle, ArrowLeft, Upload,
+  Eye, EyeOff,
 } from 'lucide-react'
 import { useSite } from '../SiteContext'
 import { adminExec, BACKEND_READY, fmtPhone } from '../siteConfig'
 import Logo from './Logo'
+import { defaultItems as defaultGalleryItems } from './Gallery'
 
 /* Compress an image file to a small WebP data-URL (keeps DB light) */
 function compressImage(file, maxW = 1280, quality = 0.78) {
@@ -42,6 +44,21 @@ function Field({ label, children }) {
   return <div style={{ marginBottom: 16 }}><label style={lbl}>{label}</label>{children}</div>
 }
 
+/* Show/Hide switch — green Eye = section/photo site par dikh raha hai */
+function VisToggle({ on, onChange, size = 'md' }) {
+  const pad = size === 'sm' ? '5px 10px' : '8px 14px'
+  return (
+    <button onClick={onChange} title={on ? 'Site par dikh raha hai — chhupane ke liye click karein' : 'Chhupa hua hai — dikhane ke liye click karein'} style={{
+      ...btnSm, padding: pad,
+      background: on ? 'rgba(31,110,61,0.12)' : 'rgba(160,60,60,0.12)',
+      color: on ? '#1f6e3d' : '#a03c3c',
+    }}>
+      {on ? <Eye size={size === 'sm' ? 13 : 15} /> : <EyeOff size={size === 'sm' ? 13 : 15} />}
+      {size !== 'sm' && (on ? 'Show' : 'Hidden')}
+    </button>
+  )
+}
+
 export default function Admin() {
   const liveConfig = useSite()
   const [pwd, setPwd] = useState(() => sessionStorage.getItem('bps_admin') || '')
@@ -62,9 +79,13 @@ export default function Admin() {
     }
   }, []) // eslint-disable-line
 
-  // seed draft from live config once loaded
+  // seed draft only after the remote config has actually loaded — otherwise a
+  // quick "Save" could overwrite the database with stale defaults
   useEffect(() => {
-    if (authed && !draft) setDraft(JSON.parse(JSON.stringify(liveConfig)))
+    if (authed && !draft && liveConfig._loaded) {
+      const { _loaded, ...rest } = liveConfig
+      setDraft(JSON.parse(JSON.stringify(rest)))
+    }
   }, [authed, liveConfig]) // eslint-disable-line
 
   const show = (ok, msg) => { setToast({ ok, msg }); setTimeout(() => setToast(null), 3500) }
@@ -233,6 +254,22 @@ export default function Admin() {
                 Site par dikhega: <b>{fmtPhone(draft.phone)}</b> · Call/WhatsApp buttons bhi isi number par jayenge.
               </p>
             </Field>
+            <Field label="Sections dikhana / chhupana">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {[
+                  ['showFees', 'Fee Structure section'],
+                  ['showNotices', 'Notice Board & Events section'],
+                ].map(([key, label]) => (
+                  <div key={key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '10px 14px', background: 'rgba(16,36,61,0.04)', borderRadius: 10 }}>
+                    <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-dark)' }}>{label}</span>
+                    <VisToggle on={draft[key] !== false} onChange={() => set({ [key]: draft[key] === false })} />
+                  </div>
+                ))}
+              </div>
+              <p style={{ fontSize: '0.78rem', color: 'var(--text-mid)', marginTop: 8 }}>
+                Hidden karne par wo section (aur uske menu links) poori site se hat jayega.
+              </p>
+            </Field>
           </div>
         )}
 
@@ -327,28 +364,59 @@ export default function Admin() {
         {tab === 'gallery' && (
           <div style={cardBox}>
             {draft.gallery === null ? (
-              <div style={{ textAlign: 'center', padding: '10px 0 4px' }}>
-                <p style={{ color: 'var(--text-mid)', marginBottom: 14, lineHeight: 1.7 }}>
-                  Abhi site par default (built-in) gallery dikh rahi hai.<br />Apni photos daalne ke liye custom gallery shuru karein.
+              <div>
+                <p style={{ color: 'var(--text-mid)', marginBottom: 14, lineHeight: 1.7, fontSize: '0.88rem' }}>
+                  Abhi site par default (built-in) gallery dikh rahi hai. Niche har item ko show/hide kar sakte hain,
+                  ya apni photos ke liye custom gallery shuru karein.
                 </p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 10, marginBottom: 16 }}>
+                  {defaultGalleryItems.map(d => {
+                    const hidden = (draft.hiddenDefaults || []).includes(d.label)
+                    return (
+                      <div key={d.label} style={{
+                        border: '1px solid rgba(16,36,61,0.1)', borderRadius: 12, overflow: 'hidden',
+                        background: '#fafafa', opacity: hidden ? 0.45 : 1,
+                      }}>
+                        <div style={{
+                          height: 74, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative',
+                          background: d.photo ? 'var(--navy)' : `linear-gradient(150deg, ${d.from}, ${d.to})`,
+                        }}>
+                          {d.photo
+                            ? <img src={d.photo} alt={d.label} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                            : <d.Icon size={28} color="rgba(255,255,255,0.9)" strokeWidth={1.5} />}
+                        </div>
+                        <div style={{ padding: '8px 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6 }}>
+                          <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--navy)', lineHeight: 1.3 }}>{d.label}</span>
+                          <VisToggle size="sm" on={!hidden} onChange={() => set({
+                            hiddenDefaults: hidden
+                              ? (draft.hiddenDefaults || []).filter(l => l !== d.label)
+                              : [...(draft.hiddenDefaults || []), d.label],
+                          })} />
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
                 <button onClick={() => set({ gallery: [] })} style={{ ...btnSm, background: 'var(--navy)', color: '#fff' }}>
-                  <ImageIcon size={14} /> Custom gallery shuru karein
+                  <ImageIcon size={14} /> Custom gallery shuru karein (apni photos)
                 </button>
               </div>
             ) : (
               <>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 12, marginBottom: 14 }}>
                   {draft.gallery.map((g, i) => (
-                    <div key={g.id} style={{ border: '1px solid rgba(16,36,61,0.1)', borderRadius: 12, overflow: 'hidden', background: '#fafafa' }}>
+                    <div key={g.id} style={{ border: '1px solid rgba(16,36,61,0.1)', borderRadius: 12, overflow: 'hidden', background: '#fafafa', opacity: g.hidden ? 0.45 : 1 }}>
                       <img src={g.image} alt={g.label} style={{ width: '100%', height: 100, objectFit: 'cover', display: 'block' }} />
                       <div style={{ padding: 8 }}>
                         <input style={{ ...inp, padding: '6px 9px', fontSize: '0.8rem', marginBottom: 6 }} placeholder="Caption" value={g.label}
                           onChange={e => set({ gallery: draft.gallery.map((x, j) => j === i ? { ...x, label: e.target.value } : x) })} />
-                        <div style={{ display: 'flex', gap: 6 }}>
+                        <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
                           <select style={{ ...inp, padding: '6px 8px', fontSize: '0.78rem' }} value={g.cat}
                             onChange={e => set({ gallery: draft.gallery.map((x, j) => j === i ? { ...x, cat: e.target.value } : x) })}>
                             {GALLERY_CATS.map(c => <option key={c}>{c}</option>)}
                           </select>
+                          <VisToggle size="sm" on={!g.hidden}
+                            onChange={() => set({ gallery: draft.gallery.map((x, j) => j === i ? { ...x, hidden: !x.hidden } : x) })} />
                           <button onClick={() => set({ gallery: draft.gallery.filter((_, j) => j !== i) })}
                             style={{ ...btnSm, background: 'rgba(160,60,60,0.1)', color: '#a03c3c', padding: '6px 9px' }}>
                             <Trash2 size={13} />

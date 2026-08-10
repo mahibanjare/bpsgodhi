@@ -4,7 +4,7 @@ import Logo from './Logo'
 import { useSite } from '../SiteContext'
 import { fmtPhone, telPhone } from '../siteConfig'
 
-const links = [
+const allLinks = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Programs', href: '#programs' },
@@ -16,7 +16,8 @@ const links = [
 ]
 
 export default function Navbar() {
-  const { phone } = useSite()
+  const { phone, showFees } = useSite()
+  const links = allLinks.filter(l => l.href !== '#fees' || showFees !== false)
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('home')

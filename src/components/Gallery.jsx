@@ -4,7 +4,7 @@ import { useSite } from '../SiteContext'
 
 const categories = ['All', 'Campus', 'Classrooms', 'Sports', 'Events', 'Cultural']
 
-const defaultItems = [
+export const defaultItems = [
   { label: 'Campus Entrance', cat: 'Campus', photo: '/campus.png', featured: true },
   { label: 'Smart Classroom', cat: 'Classrooms', Icon: MonitorPlay, from: '#1E3A5F', to: '#0A1628' },
   { label: 'Science Lab', cat: 'Classrooms', Icon: FlaskConical, from: '#1a3a4a', to: '#0e2230' },
@@ -17,15 +17,17 @@ const defaultItems = [
 ]
 
 export default function Gallery() {
-  const { gallery } = useSite()
+  const { gallery, hiddenDefaults } = useSite()
   const [cat, setCat] = useState('All')
 
-  // Admin-managed gallery (if set) — first photo becomes the featured wide tile
+  // Admin-managed gallery (if set) — first visible photo becomes the featured wide tile.
+  // Admin can hide individual items (custom: `hidden` flag; built-in: label in hiddenDefaults).
   const items = gallery?.length
-    ? gallery.map((g, i) => ({ label: g.label, cat: g.cat, photo: g.image, featured: i === 0 }))
-    : defaultItems
+    ? gallery.filter(g => !g.hidden).map((g, i) => ({ label: g.label, cat: g.cat, photo: g.image, featured: i === 0 }))
+    : defaultItems.filter(d => !hiddenDefaults?.includes(d.label))
 
   const filtered = cat === 'All' ? items : items.filter(i => i.cat === cat)
+  if (!items.length) return null
 
   return (
     <section id="gallery" className="section" style={{ background: 'var(--off-white)' }}>

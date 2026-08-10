@@ -44,6 +44,9 @@ export const DEFAULTS = {
   ],
   documents: [],
   gallery: null, // null → Gallery.jsx shows its built-in items
+  hiddenDefaults: [], // labels of built-in gallery items the admin has hidden
+  showFees: true,
+  showNotices: true,
 }
 
 // ── Phone helpers ──

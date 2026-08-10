@@ -20,8 +20,8 @@ const fmtDate = iso => {
 }
 
 export default function Notices() {
-  const { notices } = useSite()
-  if (!notices?.length) return null
+  const { notices, showNotices } = useSite()
+  if (showNotices === false || !notices?.length) return null
 
   const sorted = [...notices].sort((a, b) => (a.date < b.date ? 1 : -1))
 
