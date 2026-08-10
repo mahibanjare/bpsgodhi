@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { MapPin, Phone, Clock, Menu, X } from 'lucide-react'
+import { MapPin, Phone, Clock, Menu, X, MonitorSmartphone } from 'lucide-react'
 import Logo from './Logo'
 import { useSite } from '../SiteContext'
 import { fmtPhone, telPhone } from '../siteConfig'
@@ -85,7 +85,7 @@ export default function Navbar() {
         <a href="#home" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 12 }}>
           <Logo size={46} />
           <div>
-            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', color: 'var(--navy)', lineHeight: 1.1 }}>
+            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', color: 'var(--navy)', lineHeight: 1.1, whiteSpace: 'nowrap' }}>
               Bright Public School Godhi
             </div>
             <div style={{ fontSize: '0.62rem', color: 'var(--gold)', letterSpacing: '0.12em', fontWeight: 700, textTransform: 'uppercase' }}>
@@ -123,6 +123,17 @@ export default function Navbar() {
           })}
           <a href="#admission" className="btn-gold" style={{ marginLeft: 10, padding: '10px 22px', fontSize: '0.85rem' }}>
             Apply Now
+          </a>
+          <a href="https://bpsgodhi-webapp.vercel.app" target="_blank" rel="noopener noreferrer" title="BPS School ERP" style={{
+            display: 'inline-flex', alignItems: 'center', gap: 7, marginLeft: 8,
+            padding: '10px 18px', borderRadius: 8, textDecoration: 'none',
+            background: 'var(--navy)', color: 'var(--gold)',
+            fontWeight: 700, fontSize: '0.85rem', border: '2px solid var(--navy)',
+            transition: 'all 0.25s var(--ease)',
+          }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--navy)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'var(--navy)'; e.currentTarget.style.color = 'var(--gold)' }}>
+            <MonitorSmartphone size={15} /> School ERP
           </a>
         </div>
 
@@ -164,13 +175,22 @@ export default function Navbar() {
           onMouseLeave={e => (e.currentTarget.style.color = '#fff')}
           >{l.label}</a>
         ))}
-        <a href="#admission" className="btn-gold" onClick={() => setOpen(false)} style={{ marginTop: 12 }}>
-          Apply Now
-        </a>
+        <div style={{ display: 'flex', gap: 14, marginTop: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <a href="#admission" className="btn-gold" onClick={() => setOpen(false)}>
+            Apply Now
+          </a>
+          <a href="https://bpsgodhi-webapp.vercel.app" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 26px',
+            border: '2px solid var(--gold)', color: 'var(--gold)', background: 'transparent',
+            fontWeight: 700, fontSize: '0.92rem', borderRadius: 8, textDecoration: 'none',
+          }}>
+            <MonitorSmartphone size={17} /> School ERP
+          </a>
+        </div>
       </div>
 
       <style>{`
-        @media (max-width: 980px) {
+        @media (max-width: 1160px) {
           .nav-links { display: none !important; }
           .hamburger { display: block !important; }
           .top-bar { display: none !important; }
