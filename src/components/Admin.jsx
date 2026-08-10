@@ -44,11 +44,11 @@ function Field({ label, children }) {
   return <div style={{ marginBottom: 16 }}><label style={lbl}>{label}</label>{children}</div>
 }
 
-/* Show/Hide switch — green Eye = section/photo site par dikh raha hai */
+/* Show/Hide switch — green Eye = section/photo is visible on the site */
 function VisToggle({ on, onChange, size = 'md' }) {
   const pad = size === 'sm' ? '5px 10px' : '8px 14px'
   return (
-    <button onClick={onChange} title={on ? 'Site par dikh raha hai — chhupane ke liye click karein' : 'Chhupa hua hai — dikhane ke liye click karein'} style={{
+    <button onClick={onChange} title={on ? 'Visible on the site — click to hide' : 'Hidden — click to show'} style={{
       ...btnSm, padding: pad,
       background: on ? 'rgba(31,110,61,0.12)' : 'rgba(160,60,60,0.12)',
       color: on ? '#1f6e3d' : '#a03c3c',
@@ -107,18 +107,18 @@ export default function Admin() {
     try {
       const { ...data } = draft
       await adminExec(pwd, 'save', data)
-      show(true, 'Saved! Site updated — sabhi visitors ko naya content dikhega.')
+      show(true, 'Saved! The site is updated — all visitors will see the new content.')
     } catch (err) { show(false, err.message) }
     setBusy(false)
   }
 
   async function changePassword() {
-    if (!newPwd || newPwd.length < 6) return show(false, 'Password kam se kam 6 characters ka rakhein.')
+    if (!newPwd || newPwd.length < 6) return show(false, 'Password must be at least 6 characters.')
     setBusy(true)
     try {
       await adminExec(pwd, 'change_password', { new_password: newPwd })
       setPwd(newPwd); sessionStorage.setItem('bps_admin', newPwd); setNewPwd('')
-      show(true, 'Password badal gaya.')
+      show(true, 'Password changed successfully.')
     } catch (err) { show(false, err.message) }
     setBusy(false)
   }
@@ -153,13 +153,13 @@ export default function Admin() {
         <h1 style={{ fontFamily: 'var(--font-display)', color: 'var(--navy)', margin: '18px 0 10px' }}>Admin Panel</h1>
         <div style={{ ...cardBox, textAlign: 'left' }}>
           <p style={{ lineHeight: 1.8, color: 'var(--text-mid)', margin: 0 }}>
-            ⚠️ Backend (Supabase) abhi connect nahi hua hai. Supabase project ready hone ke baad
-            yeh panel apne aap chalu ho jayega — yahin se aap gallery, mobile number, session year,
-            notices sab kuch update kar payenge.
+            ⚠️ The backend (Supabase) is not connected yet. Once the Supabase project is ready,
+            this panel will start working automatically — you will be able to update the gallery,
+            mobile number, session year, notices and more from here.
           </p>
         </div>
         <a href="#home" onClick={() => { window.location.hash = '' }} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 20, color: 'var(--navy)', fontWeight: 700, textDecoration: 'none' }}>
-          <ArrowLeft size={16} /> Site par wapas jaayein
+          <ArrowLeft size={16} /> Back to the website
         </a>
       </div>
     )
@@ -184,7 +184,7 @@ export default function Admin() {
           </button>
         </form>
         <a href="#home" onClick={() => { window.location.hash = '' }} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 20, color: 'var(--navy)', fontWeight: 700, textDecoration: 'none', fontSize: '0.88rem' }}>
-          <ArrowLeft size={15} /> Site par wapas
+          <ArrowLeft size={15} /> Back to the website
         </a>
       </div>
     )
@@ -217,7 +217,7 @@ export default function Admin() {
           </div>
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          <a href="https://bpsgodhi-webapp.vercel.app" target="_blank" rel="noopener noreferrer" title="BPS School ERP kholein"
+          <a href="https://bpsgodhi-webapp.vercel.app" target="_blank" rel="noopener noreferrer" title="Open BPS School ERP"
             style={{ ...btnSm, background: 'rgba(255,255,255,0.12)', color: 'var(--gold)', textDecoration: 'none' }}>
             <MonitorSmartphone size={15} /> School ERP
           </a>
@@ -255,10 +255,10 @@ export default function Admin() {
               <input style={inp} value={draft.phone} maxLength={10}
                 onChange={e => set({ phone: e.target.value.replace(/\D/g, '') })} />
               <p style={{ fontSize: '0.78rem', color: 'var(--text-mid)', marginTop: 6 }}>
-                Site par dikhega: <b>{fmtPhone(draft.phone)}</b> · Call/WhatsApp buttons bhi isi number par jayenge.
+                Shown on the site as: <b>{fmtPhone(draft.phone)}</b> · Call/WhatsApp buttons will also use this number.
               </p>
             </Field>
-            <Field label="Sections dikhana / chhupana">
+            <Field label="Show / hide sections">
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {[
                   ['showFees', 'Fee Structure section'],
@@ -271,7 +271,7 @@ export default function Admin() {
                 ))}
               </div>
               <p style={{ fontSize: '0.78rem', color: 'var(--text-mid)', marginTop: 8 }}>
-                Hidden karne par wo section (aur uske menu links) poori site se hat jayega.
+                Hiding a section also removes it (and its menu links) from the entire site.
               </p>
             </Field>
           </div>
@@ -296,7 +296,7 @@ export default function Admin() {
                   ? <img src={draft.principal.photo} alt="Principal" style={{ width: 74, height: 88, objectFit: 'cover', borderRadius: 10, border: '2px solid rgba(201,168,76,0.4)' }} />
                   : <span style={{ width: 74, height: 88, borderRadius: 10, background: 'rgba(16,36,61,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><UserRound size={30} color="var(--text-light)" /></span>}
                 <label style={{ ...btnSm, background: 'var(--navy)', color: '#fff' }}>
-                  <Upload size={14} /> Photo choose karein
+                  <Upload size={14} /> Choose photo
                   <input type="file" accept="image/*" hidden onChange={async e => {
                     const f = e.target.files[0]
                     if (f) set({ principal: { ...draft.principal, photo: await compressImage(f, 600) } })
@@ -329,9 +329,9 @@ export default function Admin() {
               </div>
             ))}
             <button onClick={() => set({ fees: [...draft.fees, { group: '', admission: '', monthly: '' }] })} style={{ ...btnSm, background: 'var(--navy)', color: '#fff', marginTop: 6 }}>
-              <Plus size={14} /> Row jodein
+              <Plus size={14} /> Add row
             </button>
-            <Field label="Note (table ke niche dikhega)">
+            <Field label="Note (shown below the table)">
               <textarea style={{ ...inp, minHeight: 70, resize: 'vertical', marginTop: 14 }} value={draft.feesNote}
                 onChange={e => set({ feesNote: e.target.value })} />
             </Field>
@@ -358,9 +358,9 @@ export default function Admin() {
             ))}
             <button onClick={() => set({ notices: [...draft.notices, { id: uid(), date: new Date().toISOString().slice(0, 10), tag: 'Notice', title: '' }] })}
               style={{ ...btnSm, background: 'var(--navy)', color: '#fff', marginTop: 6 }}>
-              <Plus size={14} /> Notice jodein
+              <Plus size={14} /> Add notice
             </button>
-            <p style={{ fontSize: '0.78rem', color: 'var(--text-mid)', marginTop: 12 }}>Site par latest 6 notices dikhte hain (date ke hisaab se).</p>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-mid)', marginTop: 12 }}>The site shows the latest 6 notices (sorted by date).</p>
           </div>
         )}
 
@@ -370,8 +370,8 @@ export default function Admin() {
             {draft.gallery === null ? (
               <div>
                 <p style={{ color: 'var(--text-mid)', marginBottom: 14, lineHeight: 1.7, fontSize: '0.88rem' }}>
-                  Abhi site par default (built-in) gallery dikh rahi hai. Niche har item ko show/hide kar sakte hain,
-                  ya apni photos ke liye custom gallery shuru karein.
+                  The site is currently showing the default (built-in) gallery. You can show/hide
+                  each item below, or start a custom gallery with your own photos.
                 </p>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 10, marginBottom: 16 }}>
                   {defaultGalleryItems.map(d => {
@@ -402,7 +402,7 @@ export default function Admin() {
                   })}
                 </div>
                 <button onClick={() => set({ gallery: [] })} style={{ ...btnSm, background: 'var(--navy)', color: '#fff' }}>
-                  <ImageIcon size={14} /> Custom gallery shuru karein (apni photos)
+                  <ImageIcon size={14} /> Start custom gallery (your own photos)
                 </button>
               </div>
             ) : (
@@ -432,7 +432,7 @@ export default function Admin() {
                 </div>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                   <label style={{ ...btnSm, background: 'var(--navy)', color: '#fff' }}>
-                    <Upload size={14} /> Photos upload karein
+                    <Upload size={14} /> Upload photos
                     <input type="file" accept="image/*" multiple hidden onChange={async e => {
                       const files = [...e.target.files]
                       const items = []
@@ -441,7 +441,7 @@ export default function Admin() {
                     }} />
                   </label>
                   <button onClick={() => set({ gallery: null })} style={{ ...btnSm, background: 'rgba(16,36,61,0.07)', color: 'var(--navy)' }}>
-                    Default gallery par wapas jayein
+                    Switch back to default gallery
                   </button>
                 </div>
               </>
@@ -453,8 +453,8 @@ export default function Admin() {
         {tab === 'documents' && (
           <div style={cardBox}>
             <p style={{ fontSize: '0.84rem', color: 'var(--text-mid)', marginBottom: 14, lineHeight: 1.7 }}>
-              Certificates / disclosure documents ke liye Google Drive ya kisi bhi link ka istemal karein
-              (Drive par upload karke "Anyone with the link" share link yahan paste karein).
+              For certificates / disclosure documents, use Google Drive or any other link
+              (upload to Drive, set sharing to "Anyone with the link", and paste the link here).
             </p>
             {draft.documents.map((d, i) => (
               <div key={d.id} style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr auto', gap: 8, marginBottom: 10 }}>
@@ -468,7 +468,7 @@ export default function Admin() {
               </div>
             ))}
             <button onClick={() => set({ documents: [...draft.documents, { id: uid(), title: '', url: '' }] })} style={{ ...btnSm, background: 'var(--navy)', color: '#fff', marginTop: 6 }}>
-              <Plus size={14} /> Document jodein
+              <Plus size={14} /> Add document
             </button>
           </div>
         )}
@@ -476,17 +476,17 @@ export default function Admin() {
         {/* ── PASSWORD ── */}
         {tab === 'password' && (
           <div style={cardBox}>
-            <Field label="Naya password (min 6 characters)">
+            <Field label="New password (min 6 characters)">
               <input type="password" style={inp} value={newPwd} onChange={e => setNewPwd(e.target.value)} />
             </Field>
             <button onClick={changePassword} disabled={busy} style={{ ...btnSm, background: 'var(--navy)', color: '#fff', padding: '11px 20px' }}>
-              <KeyRound size={14} /> Password badlein
+              <KeyRound size={14} /> Change password
             </button>
           </div>
         )}
 
         <p style={{ textAlign: 'center', marginTop: 30, fontSize: '0.8rem', color: 'var(--text-mid)' }}>
-          Changes tabhi live honge jab aap upar <b>Save Changes</b> dabayenge.
+          Changes go live only after you press <b>Save Changes</b> above.
         </p>
       </div>
     </>

@@ -78,7 +78,7 @@ export async function fetchRemoteConfig() {
 
 /** Password-gated admin call. action: 'verify' | 'save' | 'change_password' */
 export async function adminExec(password, action, payload = {}) {
-  if (!BACKEND_READY) throw new Error('Backend abhi connect nahi hua hai.')
+  if (!BACKEND_READY) throw new Error('Backend is not connected yet.')
   const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/bps_admin_exec`, {
     method: 'POST',
     headers,
@@ -86,6 +86,15 @@ export async function adminExec(password, action, payload = {}) {
   })
   const body = await res.json().catch(() => ({}))
   if (!res.ok) throw new Error(body?.message || `Request failed (${res.status})`)
-  if (body?.ok !== true) throw new Error(body?.error || 'Galat password')
+  if (body?.ok !== true) {
+    // The database RPC may return Hindi messages (older deployments) — normalize to English
+    const map = {
+      'Galat password': 'Incorrect password',
+      'Password kam se kam 6 characters ka ho': 'Password must be at least 6 characters',
+      'Data bahut bada hai (8MB limit). Kam/chhoti photos rakhein.': 'Data too large (8MB limit). Use fewer or smaller photos.',
+    }
+    const raw = body?.error || 'Incorrect password'
+    throw new Error(map[raw] || raw)
+  }
   return body
 }

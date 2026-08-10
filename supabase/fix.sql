@@ -1,13 +1,13 @@
 -- ============================================================
--- FIX: Supabase par pgcrypto `extensions` schema mein hota hai,
--- isliye function ko wahan tak pahunch chahiye. Yeh script
--- function theek karti hai aur admin password dobara set karti hai.
--- SQL Editor mein poora paste karke RUN karein.
+-- FIX: On Supabase, pgcrypto lives in the `extensions` schema,
+-- so the function needs access to it. This script repairs the
+-- function and re-seeds the admin password.
+-- Paste the whole file into the SQL Editor and RUN it.
 -- ============================================================
 
 create extension if not exists pgcrypto with schema extensions;
 
--- Admin password (bps@2026) dobara seed karein — ab sahi schema ke saath
+-- Re-seed the admin password (bps@2026) — now with the correct schema
 do $$
 begin
   perform set_config('search_path', 'public, extensions', true);
@@ -16,7 +16,7 @@ begin
   values (1, crypt('bps@2026', gen_salt('bf')));
 end $$;
 
--- Function: ab search_path mein `extensions` bhi shamil hai
+-- Function: search_path now includes `extensions` as well
 create or replace function public.bps_admin_exec(
   p_password text,
   p_action text,
@@ -31,7 +31,7 @@ declare
 begin
   select pass_hash into v_hash from public.bps_admin where id = 1;
   if v_hash is null or crypt(coalesce(p_password, ''), v_hash) <> v_hash then
-    return jsonb_build_object('ok', false, 'error', 'Galat password');
+    return jsonb_build_object('ok', false, 'error', 'Incorrect password');
   end if;
 
   if p_action = 'verify' then
@@ -39,14 +39,14 @@ begin
 
   elsif p_action = 'save' then
     if pg_column_size(p_payload) > 8 * 1024 * 1024 then
-      return jsonb_build_object('ok', false, 'error', 'Data bahut bada hai (8MB limit). Kam/chhoti photos rakhein.');
+      return jsonb_build_object('ok', false, 'error', 'Data too large (8MB limit). Use fewer or smaller photos.');
     end if;
     update public.bps_config set data = p_payload, updated_at = now() where id = 1;
     return jsonb_build_object('ok', true);
 
   elsif p_action = 'change_password' then
     if length(coalesce(p_payload->>'new_password', '')) < 6 then
-      return jsonb_build_object('ok', false, 'error', 'Password kam se kam 6 characters ka ho');
+      return jsonb_build_object('ok', false, 'error', 'Password must be at least 6 characters');
     end if;
     update public.bps_admin set pass_hash = crypt(p_payload->>'new_password', gen_salt('bf')) where id = 1;
     return jsonb_build_object('ok', true);

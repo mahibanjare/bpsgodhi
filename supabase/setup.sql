@@ -50,7 +50,7 @@ declare
 begin
   select pass_hash into v_hash from public.bps_admin where id = 1;
   if v_hash is null or crypt(coalesce(p_password, ''), v_hash) <> v_hash then
-    return jsonb_build_object('ok', false, 'error', 'Galat password');
+    return jsonb_build_object('ok', false, 'error', 'Incorrect password');
   end if;
 
   if p_action = 'verify' then
@@ -58,14 +58,14 @@ begin
 
   elsif p_action = 'save' then
     if pg_column_size(p_payload) > 8 * 1024 * 1024 then
-      return jsonb_build_object('ok', false, 'error', 'Data bahut bada hai (8MB limit). Kam/chhoti photos rakhein.');
+      return jsonb_build_object('ok', false, 'error', 'Data too large (8MB limit). Use fewer or smaller photos.');
     end if;
     update public.bps_config set data = p_payload, updated_at = now() where id = 1;
     return jsonb_build_object('ok', true);
 
   elsif p_action = 'change_password' then
     if length(coalesce(p_payload->>'new_password', '')) < 6 then
-      return jsonb_build_object('ok', false, 'error', 'Password kam se kam 6 characters ka ho');
+      return jsonb_build_object('ok', false, 'error', 'Password must be at least 6 characters');
     end if;
     update public.bps_admin set pass_hash = crypt(p_payload->>'new_password', gen_salt('bf')) where id = 1;
     return jsonb_build_object('ok', true);
